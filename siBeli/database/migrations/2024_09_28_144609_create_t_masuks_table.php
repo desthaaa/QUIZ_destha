@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('t_masuks', function (Blueprint $table) {
             $table->id();
-            $table->char("kdSupplier", length: 7);
+            $table->string("kdSupplier", length: 7);
             $table->char("tglMasuk");
             $table->integer("kdAdmin", length: 3);
             $table->char("kdMasuk", length: 10);
