@@ -10,6 +10,6 @@ class tSupplier extends Model
     use HasFactory;
     protected $fillable = ["kdSupplier"
                             ,"namaSupplier"
-                            ,"Alamat"
+                            ,"alamat"
                         ];
 }

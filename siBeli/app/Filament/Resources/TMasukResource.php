@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TSupplierResource\Pages;
-use App\Filament\Resources\TSupplierResource\RelationManagers;
-use App\Models\TSupplier;
+use App\Filament\Resources\TMasukResource\Pages;
+use App\Filament\Resources\TMasukResource\RelationManagers;
+use App\Models\TMasuk;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TSupplierResource extends Resource
+class TMasukResource extends Resource
 {
-    protected static ?string $model = TSupplier::class;
+    protected static ?string $model = TMasuk::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -27,14 +27,22 @@ class TSupplierResource extends Resource
                 ->label('Kode Supplier')
                 ->required()
                 ->maxLength(7),
-                Forms\Components\TextInput::make('namaSupplier')
-                ->label('Nama Supplier')
+                Forms\Components\DatePicker::make('tglMasuk')
+                ->label('Tanggal Masuk')
+                ->required(),
+                Forms\Components\TextInput::make('kdAdmin')
+                ->label('Kode Admin')
                 ->required()
-                ->maxLength(30),
-                Forms\Components\TextInput::make('alamat')
-                ->label('Alamat Supplier')
+                ->numeric()
+                ->maxlength(3),
+                Forms\Components\TextInput::make('kdMasuk')
+                ->label('Kode Masuk')
                 ->required()
-                ->maxlength(70),
+                ->maxlength(10),
+                Forms\Components\TextInput::make('totalMasuk')
+                ->label('Total Masuk')
+                ->required()
+                ->maxlength(10),
             ]);
     }
 
@@ -43,8 +51,10 @@ class TSupplierResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('kdSupplier')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('namaSupplier')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('alamat')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('tglMasuk')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('kdAdmin')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('kdMasuk')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('totalMasuk')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -69,9 +79,9 @@ class TSupplierResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTSuppliers::route('/'),
-            'create' => Pages\CreateTSupplier::route('/create'),
-            'edit' => Pages\EditTSupplier::route('/{record}/edit'),
+            'index' => Pages\ListTMasuks::route('/'),
+            'create' => Pages\CreateTMasuk::route('/create'),
+            'edit' => Pages\EditTMasuk::route('/{record}/edit'),
         ];
     }
 }
