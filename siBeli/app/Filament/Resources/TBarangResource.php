@@ -98,3 +98,5 @@ class TBarangResource extends Resource
         ];
     }
 }
+
+// mysql sudah bisa, php nya yang tidak ada :(
